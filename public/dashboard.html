@@ -1,0 +1,15 @@
+<h2>LinkPulse Dashboard</h2>
+<input id="url" placeholder="Paste URL">
+<button onclick="create()">Create</button>
+<pre id="out"></pre>
+
+<script>
+async function create(){
+ const res = await fetch("/api/links/create",{
+  method:"POST",
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({url:url.value,user:"admin"})
+ });
+ out.innerText = JSON.stringify(await res.json(),null,2);
+}
+</script>
