@@ -1,22 +1,25 @@
 import TelegramBot from "node-telegram-bot-api";
 
-console.log("🤖 Bot file loaded");
+console.log("🤖 Bot loading...");
 
-if (!process.env.BOT_TOKEN) {
-  console.error("❌ BOT_TOKEN is missing");
+const TOKEN = process.env.BOT_TOKEN;
+
+if (!TOKEN) {
+  console.error("❌ BOT_TOKEN missing");
   process.exit(1);
 }
 
-const bot = new TelegramBot(process.env.BOT_TOKEN, {
-  polling: true
+const bot = new TelegramBot(TOKEN, { polling: true });
+
+console.log("✅ Bot started (polling)");
+
+bot.onText(/\/start/, (msg) => {
+  bot.sendMessage(
+    msg.chat.id,
+    "✅ TrackifyX Bot is LIVE!\nBackend clean restart successful 🚀"
+  );
 });
 
 bot.on("polling_error", (err) => {
   console.error("🚨 Polling error:", err.message);
 });
-
-bot.onText(/\/start/, (msg) => {
-  bot.sendMessage(msg.chat.id, "🚀 TrackifyX bot is LIVE");
-});
-
-console.log("✅ Telegram bot polling started");
