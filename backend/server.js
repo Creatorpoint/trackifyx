@@ -1,4 +1,4 @@
-require("./bot/bot");
+import "./bot/bot.js";
 import express from "express";
 import redirectRoute from "./routes/redirect.js";
 import campaignsRoute from "./routes/campaigns.js";
