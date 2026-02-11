@@ -1,9 +1,16 @@
-import "dotenv/config";
-
-console.log("🌍 ENV loaded");
-
-import "./bot/bot.js";   // ⬅️ dotenv ke baad hi
+import "dotenv/config";      // load ENV first
+import "./bot/bot.js";       // start Telegram bot
 
 import express from "express";
-import redirectRoute from "./routes/redirect.js";
-import campaignsRoute from "./routes/campaigns.js";
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("🚀 TrackifyX backend running");
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("✅ Server running on port", PORT);
+});
